@@ -1,4 +1,4 @@
 # solace
 
-A project for `websocket` practice.
+A `flask` project for `websocket` practice.
 
