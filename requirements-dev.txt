@@ -1,0 +1,11 @@
+ipython
+pytest-pudb
+pudb
+pytest
+psycopg2
+flask_marshmallow
+marshmallow==3.0.0
+flask-marshmallow 
+marshmallow-sqlalchemy
+
+-r requirements-ci.txt
