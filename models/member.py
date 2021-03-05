@@ -19,14 +19,25 @@ class Member (db.Model, SoftDeleteMixin):
     removed_at = db.Column(db.DateTime, default=None)
     created_at = db.Column(db.DateTime, default=datetime.now())
 
-    def hash_password(self, password):
+    # Unique constraint on email
+    __table_args__ = (
+        db.UniqueConstraint('email', name='_account_branch_uc'),
+    )
+
+    def __init__(self, email, hashed_password, fullname):
+        self.email = email
+        self.hashed_password = hashed_password
+        self.fullname = fullname
+
+    @classmethod
+    def hash_password(cls, password):
         return generate_password_hash(password)
 
     def to_dict(self):
         return dict(
             id=self.id,
             email=self.email,
-            hashed_password=self.hashed_password,
+            hashed_password=cls.hashed_password,
             fullname=self.fullname,
             created_at=self.created_at,
             removed_at=self.removed_at,

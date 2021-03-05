@@ -49,3 +49,8 @@ class FullnameNotInForm(ApplicationException):
     status_code = 704
     message = '400 Fullname Not In Form'
 
+
+class DuplicateMemberFound(ApplicationException):
+    status_code = 705
+    message = '400 Member Already Exists'
+
