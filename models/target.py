@@ -63,7 +63,7 @@ class Target(db.Model, SoftDeleteMixin):
         nullable=False,
     )
 
-    target_members = db.relationship(
+    messages = db.relationship(
         'Message',
     )
 
@@ -81,4 +81,20 @@ class Target(db.Model, SoftDeleteMixin):
             removed_at = self.removed_at,
             created_at=self.created_at,
         )
+
+
+class TargetSchema(ma.SQLAlchemyAutoSchema):
+#    members = ma.Method("get_target_members")
+#    is_deleted = ma.Method("get_removed_status")
+
+    class Meta:
+        model = Target
+
+#    def get_target_members(self, obj):
+#        members = [m.member_id for m in obj.target_members]
+#        return members
+#
+#    def get_removed_status(self, obj):
+#        status = True if obj.is_deleted else False
+#        return status
 
