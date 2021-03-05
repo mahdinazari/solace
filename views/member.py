@@ -3,7 +3,7 @@ from flask import jsonify, Blueprint, request
 from application.app import db
 from models.member import Member, MemberSchema
 from application.exceptions import EmptyList, PasswordNotInForm, \
-    FullnameNotInForm, EmailNotInForm
+    FullnameNotInForm, EmailNotInForm, DuplicateMemberFound
 
 
 blueprint = Blueprint('models/member', __name__, url_prefix='/api/v1/member')
@@ -41,16 +41,14 @@ def register():
     if not fullname:
         raise FullnameNotInForm()
 
-    member = Member()
-    member.email = email
-    member.hashed_password = member.hash_password(password)
-    member.fullname = fullname
+    hashed_password = Member.hash_password(password)
+    member = Member(email, hashed_password, fullname)
     duplicate_member = Member.query \
         .filter(Member.email == member.email) \
         .first()
 
     if duplicate_member:
-        return jsonify(message="400 Membert Already Exists"), 400
+        raise DuplicateMemberFound()
 
     try:
         db.session.add(member)
