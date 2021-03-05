@@ -7,5 +7,7 @@ flask_marshmallow
 marshmallow==3.0.0
 flask-marshmallow 
 marshmallow-sqlalchemy
+Flask-Migrate
+Flask-Script
 
 -r requirements-ci.txt
