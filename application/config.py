@@ -12,6 +12,10 @@ class Config(object):
 
     PRESERVE_CONTEXT_ON_EXCEPTION = False
 
+    APPLICATION_VIEWS = [
+        'member',
+    ]
+
 
 class DevelopmentConfig(Config):
      """
