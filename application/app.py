@@ -3,7 +3,7 @@ import importlib
 from flask import Flask, jsonify
 
 from application.config import Config
-from .extensions import db, migrate, ma
+from .extensions import db, migrate, ma, jwt
 from .exceptions import ApplicationException
 
 
@@ -20,6 +20,7 @@ def create_app(config_filename):
     db.init_app(app)
     migrate.init_app(app, db)
     ma.init_app(app)
+    jwt.init_app(app)
 
     for installed_app in application_views:
         view = importlib.import_module(

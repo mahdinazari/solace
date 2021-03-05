@@ -54,3 +54,8 @@ class DuplicateMemberFound(ApplicationException):
     status_code = 705
     message = '400 Member Already Exists'
 
+
+class MemberNotFound(ApplicationException):
+    status_code = 706
+    message = '401 Member Not Found'
+
